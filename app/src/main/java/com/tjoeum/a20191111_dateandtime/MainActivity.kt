@@ -6,6 +6,7 @@ import android.app.TimePickerDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Toast
+import com.tjoeum.a20191111_dateandtime.adapter.ScheduleTypeAdapter
 import com.tjoeum.a20191111_dateandtime.datas.ScheduleType
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
@@ -18,6 +19,8 @@ class MainActivity : BaseActivity(){
 
     //시작 일자 / 시간을 모두 저장하고 있는 캘린더 변수
     var startDateTimeCalenar = Calendar.getInstance()
+
+    var scheduleTypeAdapter : ScheduleTypeAdapter? = null
 
 
 
@@ -81,6 +84,15 @@ class MainActivity : BaseActivity(){
     }
 
     override fun setValues() {
+        addScheduleTypes()
+
+        scheduleTypeAdapter = ScheduleTypeAdapter(this, scheduleTyeList)
+
+        scheduleTypeSpinner.adapter = scheduleTypeAdapter
+
+
+
+
     }
 
     fun addScheduleTypes(){
