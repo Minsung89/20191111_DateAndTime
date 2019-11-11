@@ -1,8 +1,11 @@
 package com.tjoeum.a20191111_dateandtime
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,6 +25,19 @@ class MainActivity : BaseActivity(){
     }
 
     override fun setupEvent() {
+
+        saveBtn.setOnClickListener {
+            var alert = AlertDialog.Builder(this)
+            alert.setTitle("저장 확인")
+            alert.setMessage("정말 일정을 저장하겠습니까?")
+            alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
+
+                Toast.makeText(this, "일정을 저장했습니다.", Toast.LENGTH_SHORT).show()
+            })
+            alert.setNegativeButton("취소",null)
+            alert.show()
+        }
+
         startDateBtn.setOnClickListener {
 
 
