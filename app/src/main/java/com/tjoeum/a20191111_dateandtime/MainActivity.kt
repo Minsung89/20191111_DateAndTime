@@ -1,9 +1,9 @@
 package com.tjoeum.a20191111_dateandtime
 
 import android.app.DatePickerDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : BaseActivity(){
@@ -15,13 +15,28 @@ class MainActivity : BaseActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setupEvent()
+        setValues()
     }
 
     override fun setupEvent() {
         startDateBtn.setOnClickListener {
 
 
-            var datePickerDialog = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->  },startDateTimeCalenar.get(Calendar.YEAR),startDateTimeCalenar.get(Calendar.MONTH),startDateTimeCalenar.get(Calendar.DAY_OF_MONTH))
+            var datePickerDialog = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+
+                    //시작일시 변수에 선택값 반영
+                startDateTimeCalenar.set(year,month,dayOfMonth)
+
+                  //버튼에 2019-09-08 양식으로 출력
+                var sdf = SimpleDateFormat("yyyy-MM-dd (EEE)")
+
+                //버튼에 sdf를 이용해서 선택된 날짜를 String으로 변환
+                startDateBtn.text = sdf.format(startDateTimeCalenar.time)
+
+
+            },startDateTimeCalenar.get(Calendar.YEAR),startDateTimeCalenar.get(Calendar.MONTH),startDateTimeCalenar.get(Calendar.DAY_OF_MONTH))
 
 
             datePickerDialog.show()
